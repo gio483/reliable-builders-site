@@ -20,7 +20,7 @@ const {
   <form
     id="lead-form"
     class="mt-6 grid gap-4 sm:grid-cols-2"
-    data-endpoint=""
+    data-endpoint="https://formspree.io/f/mdekgjkv"
     novalidate
   >
     <div class="sm:col-span-1">
@@ -136,16 +136,30 @@ const {
 
     const endpoint = form.getAttribute('data-endpoint');
     if (endpoint) {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const original = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
       try {
+        // Formspree AJAX: JSON body + Accept: application/json returns JSON
+        // (instead of Formspree's own redirect), so we control the thank-you.
         const res = await fetch(endpoint, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            email: data.email,
+            project: data.project,
+            message: data.message,
+            _subject: `New estimate request — ${data.project || 'Remodel'} (${name})`,
+            page: data.page,
+          }),
         });
         if (!res.ok) throw new Error('bad response');
         window.location.href = '/thank-you';
         return;
       } catch (err) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = original; }
         // fall through to email compose
       }
     }

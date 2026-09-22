@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABand from '../../components/CTABand.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title={post.data.metaTitle} description={post.data.metaDescription} image={post.data.heroImage} ogType="article">
+  <article>
+    <header class="bg-navy-800 py-16 text-white sm:py-20">
+      <div class="container-rb max-w-prose-wide">
+        <a href="/blog" class="text-sm font-medium text-brass-300 hover:text-brass-200">← All guides</a>
+        <div class="mt-5 flex items-center gap-3 text-xs">
+          <span class="rounded-full bg-white/10 px-2.5 py-1 font-semibold text-brass-300">{post.data.category}</span>
+          <span class="text-white/60">{fmt(post.data.publishDate)}</span>
+        </div>
+        <h1 class="mt-5 text-display-lg text-white">{post.data.title}</h1>
+      </div>
+    </header>
+
+    {
+      post.data.heroImage && (
+        <div class="container-rb max-w-prose-wide -mt-8 sm:-mt-10">
+          <img src={post.data.heroImage} alt={post.data.title} class="aspect-[16/9] w-full rounded-2xl object-cover shadow-lift" />
+        </div>
+      )
+    }
+
+    <div class="section">
+      <div class="container-rb prose-rb max-w-prose-wide">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CTABand heading="Thinking about a project like this?" />
+</BaseLayout>

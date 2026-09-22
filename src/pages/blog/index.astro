@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABand from '../../components/CTABand.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Remodeling Guides & Tips | Reliable Builders San Diego"
+  description="Honest, plain-English guides to remodeling in San Diego — kitchen and bathroom costs, ADU rules, and how to hire a contractor you can trust."
+>
+  <section class="bg-navy-800 py-20 text-white sm:py-24">
+    <div class="container-rb max-w-3xl">
+      <span class="eyebrow text-brass-300">Remodeling guides</span>
+      <h1 class="mt-5 text-display-xl text-white">Know before you build.</h1>
+      <p class="mt-6 text-lg text-white/85">
+        Straight-talking guides on what remodeling in San Diego really costs, how the process works,
+        and how to avoid the traps. No fluff, no sales pitch.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-rb">
+      {
+        posts.length === 0 ? (
+          <p class="text-ink/70">New guides are on the way. Check back soon.</p>
+        ) : (
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <a href={`/blog/${post.slug}`} class="group card overflow-hidden transition-shadow hover:shadow-lift">
+                {post.data.heroImage && (
+                  <div class="aspect-[16/10] overflow-hidden">
+                    <img src={post.data.heroImage} alt={post.data.title} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  </div>
+                )}
+                <div class="p-6">
+                  <div class="flex items-center gap-3 text-xs">
+                    <span class="rounded-full bg-brass-50 px-2.5 py-1 font-semibold text-brass-700">{post.data.category}</span>
+                    <span class="text-ink/50">{fmt(post.data.publishDate)}</span>
+                  </div>
+                  <h2 class="mt-4 text-xl font-semibold text-ink group-hover:text-navy-600">{post.data.title}</h2>
+                  <p class="mt-2 text-sm leading-relaxed text-ink/70">{post.data.excerpt}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <CTABand />
+</BaseLayout>

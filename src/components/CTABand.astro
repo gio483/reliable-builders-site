@@ -1,0 +1,32 @@
+---
+import { site } from '../config/site';
+import Button from './Button.astro';
+export interface Props {
+  heading?: string;
+  text?: string;
+}
+const {
+  heading = 'Ready to talk through your project?',
+  text = 'Get an honest, no-pressure walkthrough of what your remodel really takes — timeline, budget, and the tradeoffs no one else tells you about.',
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-navy-600">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.12]"
+    style="background-image: radial-gradient(circle at 20% 20%, #CCA05B 0, transparent 40%), radial-gradient(circle at 85% 80%, #7E93B4 0, transparent 45%);"
+  >
+  </div>
+  <div class="container-rb relative py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-display-md text-white">{heading}</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-white/80">{text}</p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <Button href={`tel:${site.phoneRaw}`} variant="secondary" size="lg">
+          Call or text {site.phone}
+        </Button>
+        <Button href="/contact" variant="white" size="lg">Request a free estimate</Button>
+      </div>
+    </div>
+  </div>
+</section>

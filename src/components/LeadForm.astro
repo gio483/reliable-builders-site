@@ -1,0 +1,161 @@
+---
+import { site, services } from '../config/site';
+
+export interface Props {
+  heading?: string;
+  subheading?: string;
+  compact?: boolean;
+}
+const {
+  heading = 'Request your free estimate',
+  subheading = 'Tell us about your project. We’ll get back to you within one business day — no pressure, no hard sell.',
+  compact = false,
+} = Astro.props;
+---
+
+<div class:list={['card p-6 sm:p-8', compact ? '' : 'sm:p-10']}>
+  {heading && <h3 class="text-display-sm">{heading}</h3>}
+  {subheading && <p class="mt-2 text-ink/70">{subheading}</p>}
+
+  <form
+    id="lead-form"
+    class="mt-6 grid gap-4 sm:grid-cols-2"
+    data-endpoint=""
+    novalidate
+  >
+    <div class="sm:col-span-1">
+      <label for="lf-name" class="mb-1.5 block text-sm font-medium text-ink">Name</label>
+      <input
+        id="lf-name"
+        name="name"
+        type="text"
+        required
+        autocomplete="name"
+        class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink placeholder-ink/40 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+        placeholder="Your name"
+      />
+    </div>
+    <div class="sm:col-span-1">
+      <label for="lf-phone" class="mb-1.5 block text-sm font-medium text-ink">Phone</label>
+      <input
+        id="lf-phone"
+        name="phone"
+        type="tel"
+        required
+        autocomplete="tel"
+        class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink placeholder-ink/40 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+        placeholder="(619) 555-0100"
+      />
+    </div>
+    <div class="sm:col-span-2">
+      <label for="lf-email" class="mb-1.5 block text-sm font-medium text-ink">Email</label>
+      <input
+        id="lf-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink placeholder-ink/40 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+        placeholder="you@email.com"
+      />
+    </div>
+    <div class="sm:col-span-2">
+      <label for="lf-project" class="mb-1.5 block text-sm font-medium text-ink">Project type</label>
+      <select
+        id="lf-project"
+        name="project"
+        class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+      >
+        <option value="">Select one…</option>
+        {services.map((s) => <option value={s.name}>{s.name}</option>)}
+        <option value="Whole-home remodel">Whole-home remodel</option>
+        <option value="Not sure yet">Not sure yet — help me figure it out</option>
+      </select>
+    </div>
+    <div class="sm:col-span-2">
+      <label for="lf-message" class="mb-1.5 block text-sm font-medium text-ink">
+        Tell us about your project
+      </label>
+      <textarea
+        id="lf-message"
+        name="message"
+        rows="4"
+        class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink placeholder-ink/40 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+        placeholder="e.g. Kitchen remodel in San Carlos — 1990s galley kitchen, want to open it up. Ballpark timeline this fall."
+      ></textarea>
+    </div>
+
+    <!-- honeypot -->
+    <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+    <div class="sm:col-span-2 mt-1 flex flex-col gap-3">
+      <button
+        type="submit"
+        class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy-600 px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-navy-700"
+      >
+        Send my request
+      </button>
+      <p class="text-center text-sm text-ink/60">
+        Prefer to talk now? Call or text
+        <a href={`tel:${site.phoneRaw}`} class="font-semibold text-navy-600 underline decoration-brass-300 underline-offset-2">{site.phone}</a>
+      </p>
+      <p id="lf-status" class="hidden rounded-xl px-4 py-3 text-sm" role="status"></p>
+    </div>
+  </form>
+</div>
+
+<script is:inline define:vars={{ email: site.email }}>
+  const form = document.getElementById('lead-form');
+  const status = document.getElementById('lf-status');
+
+  function show(msg, ok) {
+    status.textContent = msg;
+    status.classList.remove('hidden');
+    status.classList.toggle('bg-green-50', ok);
+    status.classList.toggle('text-green-800', ok);
+    status.classList.toggle('bg-red-50', !ok);
+    status.classList.toggle('text-red-800', !ok);
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (form.company.value) return; // honeypot tripped
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    if (!name || !phone) {
+      show('Please add your name and phone so we can reach you.', false);
+      return;
+    }
+    const data = {
+      name,
+      phone,
+      email: form.email.value.trim(),
+      project: form.project.value,
+      message: form.message.value.trim(),
+      page: location.pathname,
+    };
+
+    const endpoint = form.getAttribute('data-endpoint');
+    if (endpoint) {
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error('bad response');
+        window.location.href = '/thank-you';
+        return;
+      } catch (err) {
+        // fall through to email compose
+      }
+    }
+
+    // No endpoint wired yet: open a pre-filled email so the lead still reaches us.
+    const subject = encodeURIComponent(`Estimate request — ${data.project || 'Remodel'} (${name})`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nPhone: ${phone}\nEmail: ${data.email}\nProject: ${data.project}\n\n${data.message}`
+    );
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    show('Opening your email to send us the details. Or call/text us — we reply fast.', true);
+  });
+</script>

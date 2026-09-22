@@ -1,0 +1,49 @@
+---
+import { testimonials } from '../data/testimonials';
+import { site } from '../config/site';
+const hasReal = testimonials.length > 0;
+---
+
+<section class="section bg-navy-800 text-white">
+  <div class="container-rb">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow text-brass-300">What homeowners say</span>
+      <h2 class="mt-4 text-display-lg text-white">Trusted by San Diego families</h2>
+    </div>
+
+    {
+      hasReal ? (
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t) => (
+            <figure class="rounded-2xl bg-white/[0.06] p-7 ring-1 ring-white/10">
+              <div class="flex gap-1 text-brass-400" aria-hidden="true">
+                {'★★★★★'.split('').map(() => (
+                  <span>★</span>
+                ))}
+              </div>
+              <blockquote class="mt-4 text-lg leading-relaxed text-white/90">“{t.quote}”</blockquote>
+              <figcaption class="mt-5 text-sm">
+                <span class="font-semibold text-white">{t.name}</span>
+                <span class="text-white/60"> — {t.project}, {t.location}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <div class="mx-auto mt-12 max-w-2xl rounded-2xl bg-white/[0.06] p-8 text-center ring-1 ring-white/10">
+          <p class="text-lg leading-relaxed text-white/85">
+            We’d rather you hear it from our clients than from us. Ask and we’ll connect you with
+            recent kitchen, bathroom, and ADU homeowners in your neighborhood — some you can even
+            drive by and see in person.
+          </p>
+          <a
+            href={`tel:${site.phoneRaw}`}
+            class="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-brass-500 px-6 py-3 text-sm font-semibold text-white hover:bg-brass-600"
+          >
+            Ask for references — {site.phone}
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

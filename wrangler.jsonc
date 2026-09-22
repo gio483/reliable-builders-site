@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sdlr-site",
+  "compatibility_date": "2026-07-13",
+  "compatibility_flags": ["global_fetch_strictly_public", "nodejs_compat"],
+  "observability": { "enabled": true },
+
+  // Worker entry: /api/* (yard visualizer) — everything else falls through to assets.
+  "main": "worker/index.ts",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "dist"
+  },
+
+  "kv_namespaces": [
+    { "binding": "VISUALIZER_KV", "id": "9ca3292ec0be4ee0bbad40d7f1488a10" }
+  ],
+  "r2_buckets": [
+    { "binding": "VISUALIZER_BUCKET", "bucket_name": "sdlr-visualizer" }
+  ],
+
+  "vars": {
+    "FROM_EMAIL": "SDLR Designs <designs@sandiegolandscaperemodeling.com>",
+    "LEAD_NOTIFY_EMAIL": "gio@shiftvisionmedia.com"
+  }
+
+  // Secrets (set in dash → Worker → Settings → Variables and secrets, type Secret):
+  //   MAGNIFIC_API_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY
+  // Build-time variable (dash → Settings → Build → Variables):
+  //   PUBLIC_TURNSTILE_SITE_KEY
+}

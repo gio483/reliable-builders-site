@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout title="Privacy Policy | Reliable Builders" description="How Reliable Builders collects and uses your information." noindex={true}>
+  <section class="section">
+    <div class="container-rb prose-rb max-w-prose-wide">
+      <h1>Privacy Policy</h1>
+      <p>Last updated: September 2026.</p>
+      <p>
+        Reliable Builders ({site.license}) respects your privacy. This page explains what we collect
+        and how we use it.
+      </p>
+      <h2>What we collect</h2>
+      <p>
+        When you contact us through this website or by phone, we collect the information you give us —
+        typically your name, phone number, email, and details about your project. We do not sell or
+        rent your information to anyone.
+      </p>
+      <h2>How we use it</h2>
+      <p>
+        We use your information only to respond to your inquiry, provide estimates, and communicate
+        with you about your project. If you ask us to stop contacting you, we will.
+      </p>
+      <h2>Cookies & analytics</h2>
+      <p>
+        This site may use basic analytics to understand how visitors use the pages so we can improve
+        them. This data is aggregated and not used to personally identify you.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy? Email us at <a href={`mailto:${site.email}`}>{site.email}</a> or
+        call <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

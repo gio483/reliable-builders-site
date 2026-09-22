@@ -1,0 +1,79 @@
+/* Reliable Builders — modern architectural foundation */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-navy:  #2A3E60;
+    --color-brass: #B98A45;
+    --color-stone: #F6F4F0;
+    --color-ink:   #1A1D21;
+  }
+
+  html {
+    @apply antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-stone text-ink font-sans text-base leading-relaxed;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    font-weight: 600;
+  }
+
+  h1 { @apply text-display-xl; }
+  h2 { @apply text-display-lg; }
+  h3 { @apply text-display-md; }
+  h4 { @apply text-display-sm; }
+
+  p { @apply text-ink leading-relaxed; }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  ::selection {
+    background-color: theme('colors.brass.200');
+    color: theme('colors.ink.DEFAULT');
+  }
+
+  button { @apply cursor-pointer; }
+}
+
+@layer components {
+  /* Uppercase eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-eyebrow text-brass-600;
+  }
+
+  /* Standard section padding */
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  /* Content container */
+  .container-rb {
+    @apply mx-auto w-full max-w-editorial px-5 sm:px-8;
+  }
+
+  /* Card */
+  .card {
+    @apply rounded-2xl bg-white shadow-card ring-1 ring-ink/[0.04];
+  }
+
+  /* Prose defaults for blog/markdown */
+  .prose-rb {
+    @apply prose prose-lg max-w-none
+           prose-headings:font-display prose-headings:font-semibold prose-headings:text-ink
+           prose-p:text-ink/90 prose-li:text-ink/90
+           prose-a:text-navy-600 prose-a:underline prose-a:decoration-brass-300 prose-a:underline-offset-4
+           hover:prose-a:text-brass-600
+           prose-strong:text-ink prose-strong:font-semibold
+           prose-blockquote:border-brass-400 prose-blockquote:text-ink/80;
+  }
+}

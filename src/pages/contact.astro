@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { site } from '../config/site';
+
+const mapQuery = encodeURIComponent(
+  `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.zip}`
+);
+---
+
+<BaseLayout
+  title="Contact Reliable Builders | San Diego Remodeling & ADU Estimates"
+  description="Request a free remodeling estimate from Reliable Builders. Call or text (619) 666-7556, or send your project details. Serving San Diego. CSLB #1139785."
+>
+  <section class="bg-navy-800 py-20 text-white sm:py-24">
+    <div class="container-rb max-w-3xl">
+      <span class="eyebrow text-brass-300">Get in touch</span>
+      <h1 class="mt-5 text-display-xl text-white">Let’s talk about your project.</h1>
+      <p class="mt-6 text-lg text-white/85">
+        The fastest way to get moving is a quick call or text. Prefer to write it out? Send the form
+        and we’ll follow up within one business day — no pressure, ever.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-rb grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+      <div>
+        <div class="space-y-6">
+          <a href={`tel:${site.phoneRaw}`} class="card flex items-center gap-4 p-5 transition-shadow hover:shadow-lift">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-600 text-white">
+              <svg class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M2 4.5A2.5 2.5 0 0 1 4.5 2h1.6a1 1 0 0 1 .96.73l1 3.5a1 1 0 0 1-.5 1.15l-1.5.82a11 11 0 0 0 4.54 4.54l.82-1.5a1 1 0 0 1 1.15-.5l3.5 1a1 1 0 0 1 .73.96v1.6A2.5 2.5 0 0 1 15.5 18 13.5 13.5 0 0 1 2 4.5Z"/></svg>
+            </span>
+            <div>
+              <p class="text-sm text-ink/60">Call or text</p>
+              <p class="text-lg font-semibold text-ink">{site.phone}</p>
+            </div>
+          </a>
+
+          <a href={`mailto:${site.email}`} class="card flex items-center gap-4 p-5 transition-shadow hover:shadow-lift">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-600 text-white">
+              <svg class="h-6 w-6" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 5h16v10H2z"/><path d="m2 5 8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <p class="text-sm text-ink/60">Email</p>
+              <p class="text-lg font-semibold text-ink">{site.email}</p>
+            </div>
+          </a>
+
+          <div class="card flex items-center gap-4 p-5">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-600 text-white">
+              <svg class="h-6 w-6" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 18s6-5.3 6-10a6 6 0 1 0-12 0c0 4.7 6 10 6 10Z"/><circle cx="10" cy="8" r="2"/></svg>
+            </span>
+            <div>
+              <p class="text-sm text-ink/60">Office</p>
+              <p class="font-semibold text-ink">{site.address.street}</p>
+              <p class="text-ink/70">{site.address.city}, {site.address.state} {site.address.zip}</p>
+            </div>
+          </div>
+
+          <div class="card p-5">
+            <p class="text-sm text-ink/60">Hours</p>
+            <p class="font-semibold text-ink">{site.hours}</p>
+            <p class="text-ink/70">Saturday & Sunday — by appointment</p>
+            <p class="mt-3 text-sm text-brass-700">{site.license} · Licensed & Insured</p>
+          </div>
+        </div>
+
+        <div class="mt-6 overflow-hidden rounded-2xl border border-ink/10">
+          <iframe
+            title="Reliable Builders location"
+            width="100%"
+            height="240"
+            loading="lazy"
+            style="border:0"
+            src={`https://maps.google.com/maps?q=${mapQuery}&z=13&output=embed`}
+          ></iframe>
+        </div>
+      </div>
+
+      <LeadForm />
+    </div>
+  </section>
+</BaseLayout>

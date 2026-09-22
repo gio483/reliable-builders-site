@@ -1,0 +1,48 @@
+---
+import { site } from '../config/site';
+
+// LocalBusiness / GeneralContractor structured data — helps Google Business
+// Profile + local pack. One graph, site-wide.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'GeneralContractor',
+  '@id': `${site.url}/#business`,
+  name: site.name,
+  description:
+    'Licensed San Diego general contractor specializing in kitchen remodels, bathroom remodels, and ADUs. Honest, education-first, and built to last.',
+  url: site.url,
+  telephone: site.phoneRaw,
+  email: site.email,
+  priceRange: '$$$',
+  image: `${site.url}/images/reliable-builders-og.jpg`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    postalCode: site.address.zip,
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 32.7703,
+    longitude: -117.0231,
+  },
+  areaServed: site.areas.map((a) => ({ '@type': 'City', name: `${a}, CA` })),
+  openingHours: 'Mo-Fr 07:00-17:00',
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'license',
+    name: site.license,
+  },
+  knowsAbout: [
+    'Kitchen Remodeling',
+    'Bathroom Remodeling',
+    'Accessory Dwelling Units',
+    'Garage Conversions',
+    'Whole-Home Remodeling',
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />

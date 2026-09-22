@@ -1,0 +1,63 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const includes = [
+  { t: 'Feasibility & planning', d: 'We check setbacks, utilities, and what your lot can actually support — before you spend money on drawings that won’t get approved.' },
+  { t: 'Permits & engineering', d: 'We handle the permit set, engineering, and city process so your ADU is legal, safe, and financeable.' },
+  { t: 'Detached ADUs', d: 'Purpose-built backyard units with their own kitchen, bath, and entrance — for family or long-term rental.' },
+  { t: 'Garage conversions', d: 'Turn an underused garage into a comfortable, code-compliant living space at a lower cost than building new.' },
+  { t: 'Full utilities', d: 'Electrical, plumbing, HVAC, and separate metering options coordinated and inspected properly.' },
+  { t: 'Finish to match', d: 'A finished interior that feels like a real home, not a converted shed — kitchenette, bath, and durable finishes.' },
+];
+
+const faqs = [
+  { q: 'How much does it cost to build an ADU in San Diego?', a: 'A detached ADU generally starts around <strong>$150,000</strong> and goes up with size and finish level. Garage conversions are usually less because the foundation and shell already exist. We give you an honest number based on your lot, not a generic per-square-foot guess.' },
+  { q: 'How long does the ADU process take?', a: 'Plan for the permitting and design phase to take a few months, then construction on top of that. San Diego has streamlined ADU rules, but the city process still takes time. We set realistic expectations up front and keep it moving.' },
+  { q: 'Can I build an ADU for my parents or adult kids?', a: 'Absolutely — that’s the most common reason our clients build one. A well-designed ADU gives family their own space and independence while staying close. It can also become rental income later.' },
+  { q: 'Detached ADU or garage conversion — which is right for me?', a: 'It depends on your lot, budget, and goals. A garage conversion is usually faster and cheaper; a detached unit gives more flexibility and often more value. We’ll walk you through the tradeoffs honestly before you commit.' },
+];
+---
+
+<ServiceLayout
+  slug="adus"
+  metaTitle="ADU Builder San Diego | Detached ADUs & Garage Conversions — Reliable Builders"
+  metaDescription="Licensed San Diego ADU builder — detached accessory dwelling units and garage conversions, permitted and built to code. For family or rental income. CSLB #1139785."
+  eyebrow="ADUs & Garage Conversions · San Diego"
+  headline="Room for family, or income — done by the book."
+  subhead="Detached ADUs and garage conversions for aging parents, adult kids, or rental income — permitted, engineered, and built to San Diego code."
+  heroImage="/images/adu-san-diego.jpg"
+  priceRange="From $150K"
+  includes={includes}
+  faqs={faqs}
+>
+  <h2>An ADU is one of the smartest things you can build on your lot.</h2>
+  <p>
+    Maybe your parents are getting to the age where you’d rather have them close than far. Maybe your
+    adult kid needs a foothold in an expensive city. Maybe you just want the option of rental income
+    down the road. An accessory dwelling unit answers all three — if it’s built right and built
+    legal.
+  </p>
+  <p>
+    That “built legal” part is where a lot of homeowners get burned. An unpermitted conversion can
+    haunt you at resale, at refinance, and with the city. We only build ADUs the right way: permitted,
+    engineered, and inspected.
+  </p>
+  <h3>We tell you what your lot can really do</h3>
+  <p>
+    Before anyone gets attached to a floor plan, we look at the practical stuff — setbacks, existing
+    utilities, access, and what San Diego’s ADU rules allow on your specific property. Sometimes the
+    answer is “build the detached unit you’re picturing.” Sometimes it’s “convert the garage and save
+    yourself $60,000.” Either way, you get the honest version.
+  </p>
+  <h3>Detached ADU vs. garage conversion</h3>
+  <p>
+    A <strong>garage conversion</strong> reuses a structure that already exists, so it’s typically
+    faster and less expensive. A <strong>detached ADU</strong> costs more but gives you a purpose-built
+    home with better light, layout, and privacy — and usually more long-term value. We help you weigh
+    the two against your budget and your reason for building.
+  </p>
+  <p>
+    Whichever you choose, you get a finished space that feels like a real home — a proper kitchen or
+    kitchenette, a full bath, comfortable finishes, and everything inspected and done to code.
+  </p>
+</ServiceLayout>

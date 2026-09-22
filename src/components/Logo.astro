@@ -1,0 +1,39 @@
+---
+// Reliable Builders wordmark lockup.
+// Emblem: a brass "level/roofline" chevron in a navy square. Wordmark set in the
+// display font so it matches the site type. `variant` flips colors for dark bg.
+export interface Props {
+  class?: string;
+  variant?: 'default' | 'light';
+}
+const { class: className = 'h-8 w-auto', variant = 'default' } = Astro.props;
+const wordColor = variant === 'light' ? 'text-white' : 'text-navy-700';
+const subColor = variant === 'light' ? 'text-brass-300' : 'text-brass-600';
+---
+
+<span class:list={['inline-flex items-center gap-2.5', className]} aria-label="Reliable Builders">
+  <svg
+    class="h-full w-auto"
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <rect width="40" height="40" rx="9" fill="#2A3E60"></rect>
+    <path
+      d="M9 24.5 20 13l11 11.5"
+      stroke="#CCA05B"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+    <path d="M13 27.5h14" stroke="#CCA05B" stroke-width="2.6" stroke-linecap="round"></path>
+  </svg>
+  <span class="flex flex-col leading-none">
+    <span class:list={['font-display text-[1.02rem] font-700 font-bold tracking-tight', wordColor]}
+      >Reliable Builders</span
+    >
+    <span class:list={['mt-0.5 text-[0.56rem] font-semibold uppercase tracking-[0.22em]', subColor]}
+      >Licensed San Diego GC</span
+    >
+  </span>
+</span>

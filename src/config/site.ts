@@ -2,7 +2,7 @@
 
 export const site = {
   name: 'Reliable Builders',
-  legalName: 'Reliable Builders',
+  legalName: 'Reliable Builders Inc',
   tagline: 'San Diego Remodeling & ADU Builder',
   url: 'https://reliablebuilders.net',
   phone: '(619) 666-7556',

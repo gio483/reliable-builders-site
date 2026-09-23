@@ -31,7 +31,9 @@
   h3 { @apply text-display-md; }
   h4 { @apply text-display-sm; }
 
-  p { @apply text-ink leading-relaxed; }
+  /* Paragraphs inherit their container's text color (body is text-ink on light
+     backgrounds); this prevents forced near-black text on dark sections. */
+  p { @apply leading-relaxed; }
 
   a {
     @apply transition-colors duration-200;

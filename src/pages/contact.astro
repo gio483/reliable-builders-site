@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LeadForm from '../components/LeadForm.astro';
+import Button from '../components/Button.astro';
 import { site } from '../config/site';
 
 const mapQuery = encodeURIComponent(
@@ -79,6 +80,38 @@ const mapQuery = encodeURIComponent(
       </div>
 
       <LeadForm />
+    </div>
+  </section>
+
+  <!-- Sister company — outdoor / backyard work -->
+  <section class="relative overflow-hidden bg-navy-600">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.12]"
+      style="background-image: radial-gradient(circle at 18% 20%, #CCA05B 0, transparent 42%), radial-gradient(circle at 85% 80%, #7E93B4 0, transparent 45%);"
+    >
+    </div>
+    <div class="container-rb relative py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow text-brass-300">Outdoor & backyard projects</span>
+        <h2 class="mt-4 text-display-md text-white">Looking for outdoor work?</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-white/85">
+          We focus on kitchens, bathrooms, and ADUs. For backyards, patios, pavers, pools, and
+          outdoor living spaces, reach out to our sister company,
+          <span class="font-semibold text-white">San Diego Landscape Remodeling</span> — the same
+          honest, hands-on approach, just outside the home.
+        </p>
+        <div class="mt-8 flex justify-center">
+          <Button
+            href="https://sandiegolandscaperemodeling.com"
+            variant="secondary"
+            size="lg"
+            target="_blank"
+            rel="noopener"
+          >
+            Visit San Diego Landscape Remodeling
+          </Button>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

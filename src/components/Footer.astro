@@ -65,8 +65,31 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
+    <!-- Outdoor / sister company -->
     <div
-      class="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/50 sm:flex-row sm:items-center"
+      class="mt-12 flex flex-col gap-4 rounded-2xl bg-white/[0.05] p-6 ring-1 ring-white/10 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="max-w-2xl text-sm leading-relaxed text-white/75">
+        <span class="font-semibold text-white">Looking for outdoor work?</span>
+        Backyards, patios, pavers, and outdoor living are handled by our sister company,
+        <span class="text-white">San Diego Landscape Remodeling</span> — reach out to them for
+        anything outside the home.
+      </p>
+      <a
+        href="https://sandiegolandscaperemodeling.com"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-brass-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brass-600"
+      >
+        Visit San Diego Landscape Remodeling
+        <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"
+          ><path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"></path></svg
+        >
+      </a>
+    </div>
+
+    <div
+      class="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/50 sm:flex-row sm:items-center"
     >
       <p class="text-white/50">© {year} {site.legalName}. All rights reserved. {site.license}.</p>
       <p class="text-white/50">Serving San Diego County — kitchens, bathrooms & ADUs.</p>

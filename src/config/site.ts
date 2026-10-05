@@ -28,6 +28,7 @@ export const nav = [
   { label: 'Kitchens', href: '/services/kitchens' },
   { label: 'Bathrooms', href: '/services/bathrooms' },
   { label: 'ADUs', href: '/services/adus' },
+  { label: 'Service Areas', href: '/serving' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },

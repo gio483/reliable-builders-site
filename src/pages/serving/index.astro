@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABand from '../../components/CTABand.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../config/site';
+
+const locations = (await getCollection('locations', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout
+  title="Areas We Serve | Kitchen, Bath & ADU Remodeling Across San Diego"
+  description="Reliable Builders remodels kitchens, bathrooms, and ADUs across central and east San Diego County — San Carlos, Del Cerro, La Mesa, Bonita, El Cajon, Santee, and more."
+>
+  <section class="bg-navy-800 py-20 text-white sm:py-24">
+    <div class="container-rb max-w-3xl">
+      <span class="eyebrow text-brass-300">Areas we serve</span>
+      <h1 class="mt-5 text-display-xl text-white">Remodeling across San Diego County.</h1>
+      <p class="mt-6 text-lg text-white/85">
+        We focus on central and east San Diego — the neighborhoods we know street by street. Find
+        your city below for local permitting, housing, and ADU details, or just
+        <a href="/contact" class="font-semibold text-brass-300 underline decoration-brass-400/50 underline-offset-2">reach out</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-rb">
+      {
+        locations.length === 0 ? (
+          <p class="text-ink/70">Service-area pages are on the way.</p>
+        ) : (
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {locations.map((loc) => (
+              <a
+                href={`/serving/${loc.slug}`}
+                class="group card flex items-center justify-between gap-4 p-5 transition-shadow hover:shadow-lift"
+              >
+                <div>
+                  <h2 class="text-lg font-semibold text-ink group-hover:text-navy-600">{loc.data.city}</h2>
+                  {loc.data.tagline && <p class="mt-1 text-sm text-ink/65 line-clamp-2">{loc.data.tagline}</p>}
+                </div>
+                <svg class="h-5 w-5 shrink-0 text-brass-500" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            ))}
+          </div>
+        )
+      }
+      <p class="mt-8 text-sm text-ink/55">
+        Don’t see your neighborhood? We likely still serve it — {site.license}, based in La Mesa.
+        <a href="/contact" class="font-semibold text-navy-600 underline decoration-brass-300 underline-offset-2">Just ask.</a>
+      </p>
+    </div>
+  </section>
+
+  <CTABand />
+</BaseLayout>

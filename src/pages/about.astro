@@ -91,7 +91,10 @@ const principles = [
       </div>
       <div>
         <p class="font-display text-5xl font-bold text-brass-300">Licensed</p>
-        <p class="mt-2 text-white/80">{site.license} · Fully insured</p>
+        <p class="mt-2 text-white/80">
+          <a href={site.licenseUrl} target="_blank" rel="noopener" class="underline decoration-brass-400/50 underline-offset-2 hover:text-brass-300">{site.license}</a>
+          · Fully insured
+        </p>
       </div>
       <div>
         <p class="font-display text-5xl font-bold text-brass-300">San Diego</p>

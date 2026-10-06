@@ -21,4 +21,11 @@ import { site } from '../config/site';
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    // Fire the lead conversion once the visitor reaches the thank-you page.
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', { value: 1, currency: 'USD', source: 'website_form' });
+    }
+  </script>
 </BaseLayout>

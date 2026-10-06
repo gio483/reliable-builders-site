@@ -15,7 +15,13 @@ const year = new Date().getFullYear();
           and explained every step of the way.
         </p>
         <p class="mt-4 text-xs font-medium uppercase tracking-eyebrow text-brass-300">
-          {site.license} · Licensed & Insured
+          <a
+            href={site.licenseUrl}
+            target="_blank"
+            rel="noopener"
+            class="underline decoration-brass-400/40 underline-offset-2 hover:text-brass-200"
+            >{site.license}</a
+          > · Licensed & Insured
         </p>
       </div>
 

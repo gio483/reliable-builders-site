@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Schema from '../components/Schema.astro';
+import Analytics from '../components/Analytics.astro';
 import { site } from '../config/site';
 
 export interface Props {
@@ -57,6 +58,7 @@ const ogImage = new URL(image, site.url).href;
 
     <meta name="theme-color" content="#2A3E60" />
     <Schema />
+    <Analytics />
   </head>
   <body>
     <a

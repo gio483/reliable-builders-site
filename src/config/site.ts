@@ -16,6 +16,7 @@ export const site = {
   },
   hours: 'Mon–Fri 7:00am – 5:00pm',
   license: 'CSLB #1139785',
+  licenseUrl: 'https://www.cslb.ca.gov/OnlineServices/CheckLicenseII/LicenseDetail.aspx?LicNum=1139785',
   yearsExperience: 20,
   areas: [
     'San Carlos', 'Del Cerro', 'Allied Gardens', 'Grantville',
